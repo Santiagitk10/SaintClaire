@@ -17,6 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Specialty {
 
+
     @Id
     @SequenceGenerator(
             name = "specialty_sequence",
@@ -30,6 +31,7 @@ public class Specialty {
     private Long specialtyId;
     @Size(min = 5, max = 100, message
             = "Specialty Name must be between 5 and 100 characters")
+    @Column(unique = true)
     private String specialtyName;
     @Size(min = 10, max = 45, message
             = "Physician Name must be between 10 and 45 characters")
@@ -41,6 +43,8 @@ public class Specialty {
     private Set<Patient> patientList = new HashSet<>();
 
 
-
-
+    public Specialty(String specialtyName, String physicianInCharge) {
+        this.specialtyName = specialtyName;
+        this.physicianInCharge = physicianInCharge;
+    }
 }
