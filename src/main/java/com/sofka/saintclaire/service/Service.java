@@ -1,5 +1,6 @@
 package com.sofka.saintclaire.service;
 
+import com.sofka.saintclaire.dto.CompleteOutboundDTO;
 import com.sofka.saintclaire.dto.PatientInboundDTO;
 import com.sofka.saintclaire.dto.SpecialtyInboundDTO;
 import com.sofka.saintclaire.model.Patient;
@@ -7,6 +8,9 @@ import com.sofka.saintclaire.model.Specialty;
 import com.sofka.saintclaire.repository.PatientRepository;
 import com.sofka.saintclaire.repository.SpecialtyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Service
 public class Service {
@@ -20,6 +24,13 @@ public class Service {
         this.specialtyRepository = specialtyRepository;
     }
 
+
+    public List<CompleteOutboundDTO> getSpecialties(){
+        return specialtyRepository.findAll()
+                .stream()
+                .map(this::convertEntityToCompleteOutboundDTO)
+                .collect(Collectors.toList());
+    }
 
     public void createNewSpecialty(SpecialtyInboundDTO dto) {
         specialtyRepository.save(convertSpecialtyInboundDTOtoEntity(dto));
@@ -38,6 +49,15 @@ public class Service {
 
 
     //DTO Converters
+    public CompleteOutboundDTO convertEntityToCompleteOutboundDTO(Specialty specialty){
+        CompleteOutboundDTO completeOutboundDTO = new CompleteOutboundDTO();
+        completeOutboundDTO.setSpecialtyId(specialty.getSpecialtyId());
+        completeOutboundDTO.setSpecialtyName(specialty.getSpecialtyName());
+        completeOutboundDTO.setPhysicianInCharge(specialty.getPhysicianInCharge());
+        completeOutboundDTO.setPatientList(specialty.getPatientList());
+        return completeOutboundDTO;
+    }
+
     public Specialty convertSpecialtyInboundDTOtoEntity(SpecialtyInboundDTO dto){
         Specialty specialty = new Specialty();
         specialty.setSpecialtyName(dto.getSpecialtyName());

@@ -2,9 +2,12 @@ package com.sofka.saintclaire.controller;
 
 import com.sofka.saintclaire.dto.PatientInboundDTO;
 import com.sofka.saintclaire.dto.SpecialtyInboundDTO;
+import com.sofka.saintclaire.dto.CompleteOutboundDTO;
 import com.sofka.saintclaire.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/saintclaire")
@@ -17,6 +20,12 @@ public class Controller {
     public Controller(Service service) {
         this.service = service;
     }
+
+    @GetMapping
+    public List<CompleteOutboundDTO> getSpecialties(){
+        return service.getSpecialties();
+    }
+
 
     @PostMapping("create/specialty")
     public void createNewSpecialty(@RequestBody SpecialtyInboundDTO dto){
