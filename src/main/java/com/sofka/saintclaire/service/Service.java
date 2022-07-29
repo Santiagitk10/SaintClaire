@@ -10,6 +10,7 @@ import com.sofka.saintclaire.repository.SpecialtyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Service
@@ -43,6 +44,24 @@ public class Service {
         patientRepository.save(patient);
         specialtyRepository.save(specialty);
     }
+
+    //TODO Delete if patient validation works fine returning boolean
+    /*public void validatePatient(Long patientDNI){
+        Optional<Patient> patientOptional = patientRepository.findByPatientDNI(patientDNI);
+        if(!patientOptional.isPresent()){
+            throw new IllegalStateException("Patient " + patientDNI + " Does not exist");
+        }
+
+    }*/
+
+    public Boolean validatePatient(Long patientDNI){
+        Optional<Patient> patientOptional = patientRepository.findByPatientDNI(patientDNI);
+        if(!patientOptional.isPresent()){
+            return false;
+        }
+        return true;
+    }
+
 
 
 

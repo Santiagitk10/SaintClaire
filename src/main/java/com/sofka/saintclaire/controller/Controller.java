@@ -26,6 +26,16 @@ public class Controller {
         return service.getSpecialties();
     }
 
+    //TODO Delete if patient validation works fine returning boolean
+    /*@GetMapping("validate/patient/{patientDNI}")
+    public void validatePatient(@PathVariable("patientDNI") Long patientDNI){
+            service.validatePatient(patientDNI);
+    }*/
+
+    @GetMapping("validate/patient/{patientDNI}")
+    public Boolean validatePatient(@PathVariable("patientDNI") Long patientDNI){
+        return service.validatePatient(patientDNI);
+    }
 
     @PostMapping("create/specialty")
     public void createNewSpecialty(@RequestBody SpecialtyInboundDTO dto){
