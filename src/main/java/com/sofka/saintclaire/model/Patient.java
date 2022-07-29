@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
 @Entity(name = "Patient")
 @Table(name = "patient")
@@ -37,6 +38,11 @@ public class Patient {
     private int numberOfAppointments;
     private Long fkSpecialtyId;
 
-
+    public void addAppointmentDate(){
+        String dates = getAppointmentDates();
+        String newDate = LocalDate.now().toString();
+        this.appointmentDates = dates += "," + newDate;
+        this.numberOfAppointments++;
+    }
 
 }
