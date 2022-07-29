@@ -68,6 +68,7 @@ public class Service {
     //TODO Revisar porque por el momento creo que solo me sirve para la creación
     public Patient convertPatientInboundDTOtoEntity(PatientInboundDTO dto){
         Patient patient = new Patient();
+        patient.setPatientDNI(dto.getPatientDNI());
         patient.setPatientName(dto.getPatientName());
         patient.setAge(dto.getAge());
         patient.setAppointmentDates("");

@@ -21,7 +21,7 @@ public class Controller {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("get/all/specialties")
     public List<CompleteOutboundDTO> getSpecialties(){
         return service.getSpecialties();
     }

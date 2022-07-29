@@ -27,6 +27,7 @@ public class Patient {
             generator = "patient_sequence"
     )
     private Long patientId;
+    private Long patientDNI;
     @Column(updatable = false)
     @Size(min = 10, max = 45, message
             = "Patient Name must be between 10 and 45 characters")
