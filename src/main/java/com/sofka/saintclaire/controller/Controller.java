@@ -37,6 +37,11 @@ public class Controller {
         return service.validatePatient(patientDNI);
     }
 
+    @GetMapping("validate/specialty/{specialtyName}")
+    public Boolean validateSpecialty(@PathVariable("specialtyName") String specialtyName){
+        return service.validateSpecialty(specialtyName);
+    }
+
     @PostMapping("create/specialty")
     public void createNewSpecialty(@RequestBody SpecialtyInboundDTO dto){
         service.createNewSpecialty(dto);
@@ -61,6 +66,11 @@ public class Controller {
     @DeleteMapping(path = "delete/patient/{patientId}")
     public void deletePatient(@PathVariable("patientId") Long patientId){
         service.deletePatient(patientId);
+    }
+
+    @DeleteMapping(path = "delete/specialty/{specialtyId}")
+    public void deleteSpecialty(@PathVariable("specialtyId") Long specialtyId){
+        service.deleteSpecialty(specialtyId);
     }
 
 }

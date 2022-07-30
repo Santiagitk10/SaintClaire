@@ -64,6 +64,14 @@ public class Service {
         return true;
     }
 
+    public Boolean validateSpecialty(String specialtyName){
+        Optional<Specialty> specialtyOptional = specialtyRepository.findSpecialtyBySpecialtyName(specialtyName);
+        if(!specialtyOptional.isPresent()){
+            return false;
+        }
+        return true;
+    }
+
     public void updateOnlyAppointmentInfo(Long patientDNI){
         Patient patient = patientRepository.findByPatientDNI(patientDNI).get();
         patient.addAppointmentDate();
@@ -86,6 +94,9 @@ public class Service {
     }
 
 
+    public void deleteSpecialty(Long specialtyId){
+        specialtyRepository.deleteById(specialtyId);
+    }
 
 
 
