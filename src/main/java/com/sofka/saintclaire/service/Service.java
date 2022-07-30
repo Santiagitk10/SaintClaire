@@ -63,6 +63,12 @@ public class Service {
         return true;
     }
 
+    public void updateOnlyAppointmentInfo(Long patientDNI){
+        Patient patient = patientRepository.findByPatientDNI(patientDNI).get();
+        patient.addAppointmentDate();
+        patientRepository.save(patient);
+    }
+
 
 
 

@@ -32,7 +32,6 @@ public class Controller {
         return service.getPatients();
     }
 
-
     @GetMapping("validate/patient/{patientDNI}")
     public Boolean validatePatient(@PathVariable("patientDNI") Long patientDNI){
         return service.validatePatient(patientDNI);
@@ -47,4 +46,12 @@ public class Controller {
     public void createNewPatient(@RequestBody PatientInboundDTO dto){
         service.createNewPatient(dto);
     }
+
+
+    @PutMapping("update/patient/no/specialty/{patientDNI}")
+    public void updateOnlyAppointmentInfo(@PathVariable("patientDNI") Long patientDNI){
+        service.updateOnlyAppointmentInfo(patientDNI);
+    }
+
+
 }
