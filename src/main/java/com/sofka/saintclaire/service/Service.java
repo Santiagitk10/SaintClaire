@@ -2,6 +2,7 @@ package com.sofka.saintclaire.service;
 
 import com.sofka.saintclaire.dto.CompleteOutboundDTO;
 import com.sofka.saintclaire.dto.PatientInboundDTO;
+import com.sofka.saintclaire.dto.PatientOutboundDTO;
 import com.sofka.saintclaire.dto.SpecialtyInboundDTO;
 import com.sofka.saintclaire.model.Patient;
 import com.sofka.saintclaire.model.Specialty;
@@ -33,6 +34,14 @@ public class Service {
                 .collect(Collectors.toList());
     }
 
+
+    public List<PatientOutboundDTO> getPatients(){
+        return patientRepository.findAll()
+                .stream()
+                .map(this::convertEntityToPatientOutboundDTO)
+                .collect(Collectors.toList());
+    }
+
     public void createNewSpecialty(SpecialtyInboundDTO dto) {
         specialtyRepository.save(convertSpecialtyInboundDTOtoEntity(dto));
     }
@@ -45,14 +54,6 @@ public class Service {
         specialtyRepository.save(specialty);
     }
 
-    //TODO Delete if patient validation works fine returning boolean
-    /*public void validatePatient(Long patientDNI){
-        Optional<Patient> patientOptional = patientRepository.findByPatientDNI(patientDNI);
-        if(!patientOptional.isPresent()){
-            throw new IllegalStateException("Patient " + patientDNI + " Does not exist");
-        }
-
-    }*/
 
     public Boolean validatePatient(Long patientDNI){
         Optional<Patient> patientOptional = patientRepository.findByPatientDNI(patientDNI);
@@ -95,6 +96,17 @@ public class Service {
         patient.setFkSpecialtyId(dto.getFkSpecialtyId());
         patient.addAppointmentDate();
         return patient;
+    }
+
+    public PatientOutboundDTO convertEntityToPatientOutboundDTO(Patient patient){
+        PatientOutboundDTO patientOutboundDTO = new PatientOutboundDTO();
+        patientOutboundDTO.setPatientId(patient.getPatientId());
+        patientOutboundDTO.setPatientDNI(patient.getPatientDNI());
+        patientOutboundDTO.setPatientName(patient.getPatientName());
+        patientOutboundDTO.setAge(patient.getAge());
+        patientOutboundDTO.setAppointmentDates(patient.getAppointmentDates());
+        patientOutboundDTO.setNumberOfAppointments(patient.getNumberOfAppointments());
+        return patientOutboundDTO;
     }
 
 }

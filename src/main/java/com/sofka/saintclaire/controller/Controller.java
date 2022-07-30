@@ -1,6 +1,7 @@
 package com.sofka.saintclaire.controller;
 
 import com.sofka.saintclaire.dto.PatientInboundDTO;
+import com.sofka.saintclaire.dto.PatientOutboundDTO;
 import com.sofka.saintclaire.dto.SpecialtyInboundDTO;
 import com.sofka.saintclaire.dto.CompleteOutboundDTO;
 import com.sofka.saintclaire.service.Service;
@@ -26,11 +27,11 @@ public class Controller {
         return service.getSpecialties();
     }
 
-    //TODO Delete if patient validation works fine returning boolean
-    /*@GetMapping("validate/patient/{patientDNI}")
-    public void validatePatient(@PathVariable("patientDNI") Long patientDNI){
-            service.validatePatient(patientDNI);
-    }*/
+    @GetMapping("get/all/patients")
+    public List<PatientOutboundDTO> getPatients(){
+        return service.getPatients();
+    }
+
 
     @GetMapping("validate/patient/{patientDNI}")
     public Boolean validatePatient(@PathVariable("patientDNI") Long patientDNI){
