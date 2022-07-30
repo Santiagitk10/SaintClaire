@@ -53,5 +53,14 @@ public class Controller {
         service.updateOnlyAppointmentInfo(patientDNI);
     }
 
+    @PutMapping(path = "update/patient/specialty/{patientDNI}/{specialtyId}")
+    public void updateAppointmentInfoWithSpecialty(@PathVariable("patientDNI") Long patientDNI, @PathVariable("specialtyId") Long specialtyId){
+        service.updateAppointmentInfoWithSpecialty(patientDNI, specialtyId);
+    }
+
+    @DeleteMapping(path = "delete/patient/{patientId}")
+    public void deletePatient(@PathVariable("patientId") Long patientId){
+        service.deletePatient(patientId);
+    }
 
 }

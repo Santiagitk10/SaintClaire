@@ -10,6 +10,7 @@ import com.sofka.saintclaire.repository.PatientRepository;
 import com.sofka.saintclaire.repository.SpecialtyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -68,6 +69,22 @@ public class Service {
         patient.addAppointmentDate();
         patientRepository.save(patient);
     }
+
+
+    @Transactional
+    public void updateAppointmentInfoWithSpecialty(Long patientDNI, Long specialtyId){
+        Patient patient = patientRepository.findByPatientDNI(patientDNI).get();
+        patient.addAppointmentDate();
+        Specialty specialty = specialtyRepository.findById(specialtyId).get();
+        specialty.addPatient(patient);
+        patientRepository.save(patient);
+        specialtyRepository.save(specialty);
+    }
+
+    public void deletePatient(Long patientId){
+        patientRepository.deleteById(patientId);
+    }
+
 
 
 
