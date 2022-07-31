@@ -89,6 +89,15 @@ public class Service {
         specialtyRepository.save(specialty);
     }
 
+
+    public void updateSpecialty(Long specialtyId, SpecialtyInboundDTO dto){
+        Specialty specialty = specialtyRepository.findById(specialtyId).get();
+        specialty.setSpecialtyName(dto.getSpecialtyName());
+        specialty.setPhysicianInCharge(dto.getPhysicianInCharge());
+        specialtyRepository.save(specialty);
+    }
+
+
     public void deletePatient(Long patientId){
         patientRepository.deleteById(patientId);
     }
@@ -97,6 +106,9 @@ public class Service {
     public void deleteSpecialty(Long specialtyId){
         specialtyRepository.deleteById(specialtyId);
     }
+
+
+
 
 
 

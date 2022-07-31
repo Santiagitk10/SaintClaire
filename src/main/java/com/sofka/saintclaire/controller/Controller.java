@@ -58,7 +58,17 @@ public class Controller {
         service.updateOnlyAppointmentInfo(patientDNI);
     }
 
-    @PutMapping(path = "update/patient/specialty/{patientDNI}/{specialtyId}")
+
+    @PutMapping("update/specialty/{specialtyId}")
+    public void updateSpecialty(@PathVariable("specialtyId") Long specialtyId, @RequestBody SpecialtyInboundDTO dto){
+        service.updateSpecialty(specialtyId, dto);
+    }
+
+
+
+
+
+    @PatchMapping(path = "update/patient/specialty/{patientDNI}/{specialtyId}")
     public void updateAppointmentInfoWithSpecialty(@PathVariable("patientDNI") Long patientDNI, @PathVariable("specialtyId") Long specialtyId){
         service.updateAppointmentInfoWithSpecialty(patientDNI, specialtyId);
     }
