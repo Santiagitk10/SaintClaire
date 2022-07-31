@@ -110,10 +110,6 @@ public class Service {
 
 
 
-
-
-
-
     //DTO Converters
     public CompleteOutboundDTO convertEntityToCompleteOutboundDTO(Specialty specialty){
         CompleteOutboundDTO completeOutboundDTO = new CompleteOutboundDTO();
@@ -131,7 +127,6 @@ public class Service {
         return specialty;
     }
 
-    //TODO Revisar porque por el momento creo que solo me sirve para la creación
     public Patient convertPatientInboundDTOtoEntity(PatientInboundDTO dto){
         Patient patient = new Patient();
         patient.setPatientDNI(dto.getPatientDNI());
